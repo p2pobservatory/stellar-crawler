@@ -1,6 +1,6 @@
 # Stellar Crawler
 
-This repository crawls the **Stellar** network and prepares the results for ingestion. The crawling itself is performed by the upstream [Stellarbeat `js-stellar-node-crawler`](https://github.com/stellarbeat/js-stellar-node-crawler) (vendored in `js-stellar-node-crawler/`); two Python scripts at the repository root adapt its output into the Observatory's data layout and add a connectivity (TCP ping) check.
+This repository crawls the **Stellar** network and prepares the results for ingestion. The crawling itself is performed by the upstream [Stellarbeat `js-stellar-node-crawler`](https://github.com/stellarbeat/js-stellar-node-crawler) (vendored in `js-stellar-node-crawler/`); two Python scripts at the repository root adapt its output into a convenient layout and add a connectivity (TCP ping) check.
 
 **Note:**
 - The actual peer discovery is done by the bundled Stellarbeat crawler (TypeScript, MIT licensed). See `js-stellar-node-crawler/src/README.md` for its internal architecture.
@@ -9,7 +9,7 @@ This repository crawls the **Stellar** network and prepares the results for inge
 ## Components
 
 - **`js-stellar-node-crawler/`**: the vendored Stellarbeat crawler. It connects to a set of seed nodes, follows the network to discover peers, and records each node's validating status, version, lag and known peers. The runnable entry point used here is `crawler/crawl.js`, which crawls from a `nodes.json` seed and writes raw results into `crawler/crawl_result/`.
-- **`write_crawl_data.py`**: parses the crawl results and the crawl log, then writes the discovered nodes, per-node responses (peers, version, validating status, …), the active set and the raw crawl log into the Observatory data tree. It also refreshes the seed file with the latest active nodes for the next run.
+- **`write_crawl_data.py`**: parses the crawl results and the crawl log, then writes the discovered nodes, per-node responses (peers, version, validating status, …), the active set and the raw crawl log into a specified directory. It also refreshes the seed file with the latest active nodes for the next run.
 - **`stellar_pinging.py`**: reads the most recent discovered-node list and performs a TCP connectivity check on each node, recording those that are reachable.
 
 ## Setup Instructions
@@ -42,7 +42,7 @@ The three components run in sequence.
    ```
    This produces, in `crawl_result/`: `nodes.json` (per-node records), `all_nodes.json` (all discovered addresses), `crawldata.json` (latest closed ledger), and the redirected `stellar_crawl.json` log.
 
-2. **Export the crawl data** into the Observatory layout and refresh the seed list:
+2. **Export the crawl data** and refresh the seed list:
    ```bash
    cd ../..                 # back to the repository root
    python write_crawl_data.py <path_to_data_dir>
@@ -58,14 +58,14 @@ The three components run in sequence.
 
 `write_crawl_data.py` and `stellar_pinging.py` write under the specified data directory (e.g. `data/stellar/`), organised by date:
 
-- `discovered/` — all discovered node IPs.
-- `active/` — `ip:port` of nodes that returned node information.
-- `responded_peerList/` — per-node records (peers, version, validating status, …).
-- `crawl_data/` — the raw crawl log, consumed by the data pipeline.
-- `pinged_peerList/` — nodes that responded to a TCP ping.
+- `discovered/`: all discovered node IPs.
+- `active/`: `ip:port` of nodes that returned node information.
+- `responded_peerList/`: per-node records (peers, version, validating status, …).
+- `crawl_data/`: the raw crawl log.
+- `pinged_peerList/`: nodes that responded to a TCP ping.
 
 The exporter additionally rewrites `js-stellar-node-crawler/crawler/nodes.json` with the latest active nodes, so each run reseeds itself from the previous one.
 
 ## Credits
 
-Peer discovery is provided by the [Stellarbeat `js-stellar-node-crawler`](https://github.com/stellarbeat/js-stellar-node-crawler) (MIT). The wrapper scripts and Observatory integration are specific to this repository.
+Peer discovery is provided by the [Stellarbeat `js-stellar-node-crawler`](https://github.com/stellarbeat/js-stellar-node-crawler) (MIT). The wrapper scripts are specific to this repository.
