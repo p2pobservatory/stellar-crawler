@@ -1,0 +1,53 @@
+{
+  "name": "@stellarbeat/js-stellar-node-crawler",
+  "version": "5.1.0",
+  "description": "Crawl the network for nodes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stellarbeat/js-stellar-node-crawler.git"
+  },
+  "engines": {
+    "node": "20.*"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "preversion": "yarn run build",
+    "build": "tsc --declaration",
+    "examples:crawl": "yarn run build; NODE_PATH=node_modules node examples/crawl",
+    "test": "jest"
+  },
+  "types": "lib/index.d.ts",
+  "files": [
+    ".env.dist",
+    "readme.md",
+    "lib/**",
+    "LICENSE",
+    "examples/**"
+  ],
+  "author": "pieterjan84@github",
+  "license": "MIT",
+  "dependencies": {
+    "@stellarbeat/js-stellar-node-connector": "^7.0.1",
+    "@stellarbeat/js-stellarbeat-shared": "^6.6.1",
+    "async": "^3.2.6",
+    "dotenv": "^16.4.5",
+    "lru-cache": "^11.0.1",
+    "neverthrow": "^8.0.0",
+    "pino": "^9.4.0"
+  },
+  "devDependencies": {
+    "@stellar/stellar-base": "12.1.1",
+    "@types/async": "^3.2.7",
+    "@types/jest": "29.5.13",
+    "@types/node": "20.*",
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "jest": "29.7.0",
+    "jest-mock-extended": "^3.0.5",
+    "np": "^10.0.7",
+    "prettier": "^3.3.3",
+    "ts-jest": "29.2.5",
+    "typescript": "^5.6.2"
+  },
+  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b"
+}

@@ -1,0 +1,19 @@
+Re-cap of steps used to get the Stellar crawler to work:
+
+	# needed to install corepack
+
+	sudo npm install corepack
+
+	# and then to get pnpm
+
+	corepack enable pnpm
+
+	# then in the repo run
+
+	pnpm install
+	pnpm build
+
+
+To run the crawler, go into 'crawler' directory and run
+
+node crawl.js $PATH to seed nodes file$

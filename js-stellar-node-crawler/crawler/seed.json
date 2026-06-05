@@ -1,0 +1,40 @@
+[
+  {
+    "ip": "18.212.136.142",
+    "port": 11625,
+    "publicKey": "GAGLRZGH3NKNOTIMHDUR7SASUU7CHSHFTLSQETOSRFVCWRRHD7OCTKKX",
+    "ledgerVersion": 22,
+    "overlayVersion": 35,
+    "overlayMinVersion": 33,
+    "networkId": "",
+    "versionStr": "steller-core v22.0.0 (721fd0a654d5e82d38c748a91053e530a475193d)",
+    "active": true,
+    "overLoaded": false,
+    "quorumSet": {
+      "threshold": 2,
+      "validators": [],
+      "innerQuorumSets": []
+    },
+    "geoData": {
+      "dateUpdated": "2020-05-31T12:40:27.290Z"
+    },
+    "statistics": {
+      "activeInLastCrawl": false,
+      "overLoadedInLastCrawl": false,
+      "validatingInLastCrawl": false,
+      "active30DaysPercentage": 0,
+      "overLoaded30DaysPercentage": 0,
+      "validating30DaysPercentage": 0,
+      "active24HoursPercentage": 0,
+      "overLoaded24HoursPercentage": 0,
+      "validating24HoursPercentage": 0,
+      "has30DayStats": true
+    },
+    "dateDiscovered": "2020-05-31T12:40:27.290Z",
+    "dateUpdated": "2020-05-31T12:40:27.922Z",
+    "isValidator": false,
+    "isFullValidator": false,
+    "isValidating": false,
+    "index": 0
+  }
+]
