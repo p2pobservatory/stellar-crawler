@@ -10,7 +10,7 @@ import threading
 import time
 import requests
 import socket
-
+import sys
 
 # Suppress SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -18,8 +18,10 @@ file_lock = threading.Lock()
 
 default_ports = ['11625']
 
-datadir = '../../data_new/'
-dirpath = datadir+'stellar/'
+datadir = sys.argv[1] if len(sys.argv) > 1 else './data'
+if not datadir.endswith('/'):
+    datadir += '/'
+dirpath = datadir + 'stellar/'
 
 current_datetime = datetime.now()
 formatted_datetime = current_datetime.strftime("%Y%m%d %H")

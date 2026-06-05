@@ -3,9 +3,12 @@
 from datetime import datetime
 import json
 import os
+import sys
 
-
-dirpath  = '../../data_new/stellar/'
+datadir = sys.argv[1] if len(sys.argv) > 1 else './data'
+if not datadir.endswith('/'):
+    datadir += '/'
+dirpath  = datadir + 'stellar/'
 
 current_datetime = datetime.now()
 formatted_datetime = current_datetime.strftime("%Y%m%d %H")
